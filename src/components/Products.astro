@@ -1,0 +1,93 @@
+---
+const products = [
+  {
+    id: 'pipeline',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+    title: 'AI Pipeline API',
+    description: 'Chain LLM calls, embeddings, and custom logic into reliable, observable pipelines. Built-in retry, caching, and cost tracking.',
+    features: ['Multi-model orchestration', 'Automatic fallbacks', 'Usage analytics dashboard'],
+    badge: 'Most Popular',
+    endpoint: 'api.ok-robot.co/v1/pipeline',
+  },
+  {
+    id: 'transform',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`,
+    title: 'Data Transform API',
+    description: 'AI-powered data normalization, extraction, and format conversion. Feed it messy data, get clean structured output.',
+    features: ['Schema inference', 'Batch processing', '50+ format support'],
+    badge: null,
+    endpoint: 'api.ok-robot.co/v1/transform',
+  },
+  {
+    id: 'web3',
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`,
+    title: 'Web3 Bridge API',
+    description: 'Unified interface across EVM chains, Solana, and more. Smart contract interaction, token data, and DeFi integrations.',
+    features: ['Multi-chain support', 'Gas optimization', 'Event streaming'],
+    badge: 'New',
+    endpoint: 'api.ok-robot.co/v1/web3',
+  },
+];
+---
+
+<section id="products" class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Section header -->
+    <div class="max-w-2xl mb-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">Products</span>
+      <h2 class="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Three APIs. Infinite possibilities.
+      </h2>
+      <p class="text-text-secondary text-lg leading-relaxed">
+        Each product is a standalone API with its own documentation, SDK, and dashboard.
+        Use one or combine them for powerful workflows.
+      </p>
+    </div>
+
+    <!-- Product Cards -->
+    <div class="grid md:grid-cols-3 gap-6">
+      {products.map((product, i) => (
+        <div class="group relative rounded-2xl border border-border bg-deep/60 backdrop-blur-sm p-8 hover:border-accent/30 hover:bg-surface/30 transition-all duration-300">
+          {/* Badge */}
+          {product.badge && (
+            <span class="absolute top-6 right-6 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
+              {product.badge}
+            </span>
+          )}
+
+          {/* Icon */}
+          <div class="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent mb-6 group-hover:bg-accent/20 transition-colors">
+            <Fragment set:html={product.icon} />
+          </div>
+
+          {/* Content */}
+          <h3 class="font-[family-name:var(--font-display)] text-xl font-bold mb-3">{product.title}</h3>
+          <p class="text-text-secondary text-sm leading-relaxed mb-6">{product.description}</p>
+
+          {/* Features */}
+          <ul class="space-y-2 mb-8">
+            {product.features.map(f => (
+              <li class="flex items-center gap-2 text-sm text-text-muted">
+                <svg class="w-3.5 h-3.5 text-accent shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          {/* Endpoint preview */}
+          <div class="rounded-lg bg-midnight/80 border border-border/50 px-4 py-2.5 mb-6">
+            <code class="text-[11px] font-[family-name:var(--font-mono)] text-text-muted">
+              <span class="text-green-400">GET</span> {product.endpoint}
+            </code>
+          </div>
+
+          {/* Link */}
+          <a href={`/products#${product.id}`} class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:text-accent-dim transition-colors">
+            Learn more
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Pricing from '../components/Pricing.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    q: 'Can I switch plans at any time?',
+    a: 'Yes. Upgrades take effect immediately and downgrades apply at the next billing cycle. No long-term contracts required.',
+  },
+  {
+    q: 'What happens if I exceed my request limit?',
+    a: 'We won\'t cut you off. Overages are billed at a per-request rate that\'s listed on your dashboard. You can also set hard limits to prevent surprises.',
+  },
+  {
+    q: 'Do you offer annual billing?',
+    a: 'Yes — annual plans come with a 20% discount. Contact us or toggle to annual billing in your dashboard.',
+  },
+  {
+    q: 'Is the free tier really free?',
+    a: 'Completely. No credit card required, no expiration. It\'s designed so you can prototype and test without any risk.',
+  },
+  {
+    q: 'What support do Enterprise plans include?',
+    a: 'A dedicated support engineer, private Slack channel, custom SLA (up to 99.99%), onboarding assistance, and architecture review.',
+  },
+];
+---
+
+<Layout title="Pricing" description="Simple, transparent API pricing. Start free and scale as you grow.">
+  <Nav />
+  <main class="pt-24">
+    <Pricing />
+
+    {/* FAQ */}
+    <section class="py-16 border-t border-border/30">
+      <div class="max-w-3xl mx-auto px-6">
+        <h2 class="font-[family-name:var(--font-display)] text-2xl font-bold tracking-tight mb-10 text-center">
+          Frequently asked questions
+        </h2>
+        <div class="space-y-6">
+          {faqs.map((faq) => (
+            <details class="group rounded-xl border border-border bg-deep/60 overflow-hidden">
+              <summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-sm font-medium text-text-primary hover:bg-surface/30 transition-colors">
+                {faq.q}
+                <svg class="w-4 h-4 text-text-muted group-open:rotate-45 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6"/></svg>
+              </summary>
+              <div class="px-6 pb-5 text-sm text-text-secondary leading-relaxed">
+                {faq.a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

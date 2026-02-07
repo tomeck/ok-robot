@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const sections = [
+  {
+    title: 'Getting Started',
+    icon: '🚀',
+    links: [
+      { label: 'Quickstart Guide', href: '#', time: '5 min' },
+      { label: 'Authentication', href: '#', time: '3 min' },
+      { label: 'SDKs & Libraries', href: '#', time: '2 min' },
+      { label: 'Rate Limits & Errors', href: '#', time: '4 min' },
+    ],
+  },
+  {
+    title: 'AI Pipeline API',
+    icon: '⚡',
+    links: [
+      { label: 'Pipeline Basics', href: '#', time: '8 min' },
+      { label: 'Step Types', href: '#', time: '10 min' },
+      { label: 'Fallbacks & Retries', href: '#', time: '6 min' },
+      { label: 'Observability', href: '#', time: '5 min' },
+    ],
+  },
+  {
+    title: 'Data Transform API',
+    icon: '🔄',
+    links: [
+      { label: 'Transform Basics', href: '#', time: '6 min' },
+      { label: 'Schema Definition', href: '#', time: '8 min' },
+      { label: 'Batch Processing', href: '#', time: '5 min' },
+      { label: 'Supported Formats', href: '#', time: '3 min' },
+    ],
+  },
+  {
+    title: 'Web3 Bridge API',
+    icon: '🔗',
+    links: [
+      { label: 'Web3 Basics', href: '#', time: '7 min' },
+      { label: 'Chain Support', href: '#', time: '4 min' },
+      { label: 'Smart Contract Calls', href: '#', time: '10 min' },
+      { label: 'Event Streaming', href: '#', time: '6 min' },
+    ],
+  },
+];
+---
+
+<Layout title="Documentation" description="Learn how to integrate OK ROBOT's APIs into your applications.">
+  <Nav />
+  <main class="pt-24">
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">Documentation</span>
+      <h1 class="font-[family-name:var(--font-display)] text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        Build with OK ROBOT
+      </h1>
+      <p class="text-text-secondary text-lg max-w-2xl mb-4">
+        Everything you need to integrate our APIs. For the full interactive API reference,
+        visit <a href="https://api.ok-robot.co/docs" class="text-accent hover:text-accent-dim transition-colors">api.ok-robot.co/docs</a>.
+      </p>
+      <p class="text-sm text-text-muted mt-2">Documentation pages are coming soon. The links below preview the planned structure.</p>
+
+      {/* Quick install */}
+      <div class="flex flex-wrap gap-3 mt-8 mb-16">
+        <div class="rounded-lg bg-surface/50 border border-border/50 px-4 py-2.5 flex items-center gap-3">
+          <span class="text-[11px] text-text-muted font-[family-name:var(--font-mono)] uppercase">npm</span>
+          <code class="text-sm font-[family-name:var(--font-mono)] text-accent">npm i @ok-robot/sdk</code>
+        </div>
+        <div class="rounded-lg bg-surface/50 border border-border/50 px-4 py-2.5 flex items-center gap-3">
+          <span class="text-[11px] text-text-muted font-[family-name:var(--font-mono)] uppercase">pip</span>
+          <code class="text-sm font-[family-name:var(--font-mono)] text-accent">pip install ok-robot</code>
+        </div>
+        <div class="rounded-lg bg-surface/50 border border-border/50 px-4 py-2.5 flex items-center gap-3">
+          <span class="text-[11px] text-text-muted font-[family-name:var(--font-mono)] uppercase">go</span>
+          <code class="text-sm font-[family-name:var(--font-mono)] text-accent">go get ok-robot.co/sdk</code>
+        </div>
+      </div>
+
+      {/* Doc sections */}
+      <div class="grid md:grid-cols-2 gap-6">
+        {sections.map((section) => (
+          <div class="rounded-2xl border border-border bg-deep/60 p-8 hover:border-border-light transition-colors">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="text-2xl">{section.icon}</span>
+              <h2 class="font-[family-name:var(--font-display)] text-xl font-bold">{section.title}</h2>
+            </div>
+            <ul class="space-y-1">
+              {section.links.map(link => (
+                <li>
+                  <a href={link.href} class="flex items-center justify-between px-3 py-2.5 -mx-3 rounded-lg hover:bg-surface/40 transition-colors group">
+                    <span class="text-sm text-text-secondary group-hover:text-text-primary transition-colors">{link.label}</span>
+                    <span class="text-[11px] text-text-muted">{link.time}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

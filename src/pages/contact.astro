@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contact" description="Get in touch with the OK ROBOT team.">
+  <Nav />
+  <main class="pt-24">
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid lg:grid-cols-2 gap-16">
+        {/* Left: Info */}
+        <div>
+          <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">Contact</span>
+          <h1 class="font-[family-name:var(--font-display)] text-4xl font-bold tracking-tight mb-6">
+            Let's talk
+          </h1>
+          <p class="text-text-secondary text-lg leading-relaxed mb-10">
+            Have a question about our APIs, need help with integration, or want to discuss
+            an enterprise deployment? We'd love to hear from you.
+          </p>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-[family-name:var(--font-display)] font-semibold text-sm mb-2">General Inquiries</h3>
+              <a href="mailto:teck@ok-robot.co" class="text-accent hover:text-accent-dim transition-colors">teck@ok-robot.co</a>
+            </div>
+            <div>
+              <h3 class="font-[family-name:var(--font-display)] font-semibold text-sm mb-2">Enterprise Sales</h3>
+              <a href="mailto:sales@ok-robot.co" class="text-accent hover:text-accent-dim transition-colors">sales@ok-robot.co</a>
+            </div>
+            <div>
+              <h3 class="font-[family-name:var(--font-display)] font-semibold text-sm mb-2">Technical Support</h3>
+              <a href="mailto:support@ok-robot.co" class="text-accent hover:text-accent-dim transition-colors">support@ok-robot.co</a>
+            </div>
+            <div>
+              <h3 class="font-[family-name:var(--font-display)] font-semibold text-sm mb-2">Response Time</h3>
+              <p class="text-text-secondary text-sm">Free tier: 48 hours. Pro: 4 hours. Enterprise: 1 hour.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Contact form */}
+        <div class="rounded-2xl border border-border bg-deep/60 p-8 lg:p-10">
+          <h2 class="font-[family-name:var(--font-display)] font-bold text-xl mb-6">Send a message</h2>
+          <form id="contact-form" class="space-y-5">
+            <div>
+              <label for="name" class="block text-sm text-text-secondary mb-2">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-surface/50 border border-border text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors"
+                placeholder="Your name"
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm text-text-secondary mb-2">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-surface/50 border border-border text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors"
+                placeholder="you@company.com"
+              />
+            </div>
+            <div>
+              <label for="subject" class="block text-sm text-text-secondary mb-2">Subject</label>
+              <select
+                id="subject"
+                name="subject"
+                class="w-full px-4 py-3 rounded-xl bg-surface/50 border border-border text-text-primary text-sm focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors"
+              >
+                <option value="general">General Inquiry</option>
+                <option value="enterprise">Enterprise Sales</option>
+                <option value="support">Technical Support</option>
+                <option value="partnership">Partnership</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm text-text-secondary mb-2">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full px-4 py-3 rounded-xl bg-surface/50 border border-border text-text-primary text-sm placeholder:text-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-colors resize-none"
+                placeholder="Tell us about your project or question..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full py-3.5 px-6 bg-accent text-midnight font-semibold rounded-xl hover:bg-accent-dim transition-colors shadow-lg shadow-accent/20"
+            >
+              Send Message
+            </button>
+            <p class="text-[11px] text-text-muted text-center">
+              We'll get back to you within 48 hours.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // TODO: Wire this up to your form backend (Formspree, custom endpoint, etc.)
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Form submission will be wired to your backend. See the TODO in contact.astro.');
+  });
+</script>

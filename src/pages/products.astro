@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+const products = [
+  {
+    id: 'pipeline',
+    title: 'AI Pipeline API',
+    tagline: 'Orchestrate complex AI workflows with a single API call',
+    description: 'Chain multiple LLM providers, embed models, and custom logic into fault-tolerant pipelines. Built-in observability, cost tracking, and automatic failover ensure your AI features never go down.',
+    useCases: [
+      'Content generation pipelines with review stages',
+      'RAG (Retrieval Augmented Generation) workflows',
+      'Multi-model evaluation and routing',
+      'Automated data enrichment',
+    ],
+    specs: [
+      { label: 'Avg Latency', value: '< 200ms overhead' },
+      { label: 'Supported Models', value: '30+ LLMs' },
+      { label: 'Max Pipeline Steps', value: '50' },
+      { label: 'Concurrent Pipelines', value: 'Unlimited' },
+    ],
+    codeExample: `import { OKRobot } from '@ok-robot/sdk'
+
+const client = new OKRobot({ apiKey: process.env.OK_ROBOT_KEY })
+
+const pipeline = client.pipeline.create({
+  name: 'content-review',
+  steps: [
+    { type: 'llm', model: 'gpt-4o', prompt: 'Generate...' },
+    { type: 'llm', model: 'claude-sonnet', prompt: 'Review...' },
+    { type: 'condition', check: 'score > 0.8' },
+    { type: 'webhook', url: 'https://your-app.com/publish' },
+  ],
+  fallback: { model: 'gpt-4o-mini' },
+})
+
+const result = await pipeline.run({ topic: 'AI trends' })`,
+  },
+  {
+    id: 'transform',
+    title: 'Data Transform API',
+    tagline: 'Turn messy data into structured gold',
+    description: 'Feed any data format — CSV, JSON, XML, PDFs, images, even free text — and get back clean, validated, structured output matching your target schema. AI-powered inference handles edge cases that rule-based systems miss.',
+    useCases: [
+      'ETL pipeline preprocessing',
+      'Invoice and receipt parsing',
+      'Legacy data migration',
+      'API response normalization',
+    ],
+    specs: [
+      { label: 'Avg Latency', value: '< 50ms (cached)' },
+      { label: 'Input Formats', value: '50+' },
+      { label: 'Max Payload', value: '100MB' },
+      { label: 'Accuracy', value: '99.2%' },
+    ],
+    codeExample: `import { OKRobot } from '@ok-robot/sdk'
+
+const client = new OKRobot({ apiKey: process.env.OK_ROBOT_KEY })
+
+// Transform messy CSV to structured JSON
+const result = await client.transform({
+  input: rawCsvData,
+  inputType: 'csv',
+  schema: {
+    name: 'string',
+    email: 'email',
+    amount: 'currency(USD)',
+    date: 'iso8601',
+  },
+  options: {
+    inferMissing: true,
+    validateEmail: true,
+    deduplicateOn: 'email',
+  }
+})
+
+console.log(result.data)     // Clean structured array
+console.log(result.warnings) // Any issues found`,
+  },
+  {
+    id: 'web3',
+    title: 'Web3 Bridge API',
+    tagline: 'One API for every chain',
+    description: 'Interact with smart contracts, query token data, and stream events across Ethereum, Polygon, Arbitrum, Solana, and more — all through a unified REST and WebSocket interface. No web3 library sprawl required.',
+    useCases: [
+      'Portfolio tracking across chains',
+      'DeFi protocol integration',
+      'NFT marketplace backends',
+      'Cross-chain transaction monitoring',
+    ],
+    specs: [
+      { label: 'Supported Chains', value: '12+' },
+      { label: 'Block Lag', value: '< 2 blocks' },
+      { label: 'WebSocket Streams', value: 'Unlimited' },
+      { label: 'Historical Data', value: 'Full archive' },
+    ],
+    codeExample: `import { OKRobot } from '@ok-robot/sdk'
+
+const client = new OKRobot({ apiKey: process.env.OK_ROBOT_KEY })
+
+// Get token balance across all chains
+const balances = await client.web3.balances({
+  address: '0x1234...abcd',
+  chains: ['ethereum', 'polygon', 'arbitrum'],
+  tokens: ['USDC', 'WETH'],
+})
+
+// Stream real-time events
+const stream = client.web3.stream({
+  chain: 'ethereum',
+  contract: '0xdead...beef',
+  events: ['Transfer', 'Approval'],
+})
+
+stream.on('event', (e) => console.log(e))`,
+  },
+];
+---
+
+<Layout title="Products" description="Explore OK ROBOT's API products: AI Pipeline, Data Transform, and Web3 Bridge APIs.">
+  <Nav />
+  <main class="pt-24">
+    {/* Page header */}
+    <section class="max-w-7xl mx-auto px-6 py-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">Products</span>
+      <h1 class="font-[family-name:var(--font-display)] text-4xl md:text-5xl font-bold tracking-tight mb-4">
+        APIs built for developers
+      </h1>
+      <p class="text-text-secondary text-lg max-w-2xl">
+        Each product is independently deployable with its own SDK, documentation, and dashboard.
+        Use them individually or compose them into powerful workflows.
+      </p>
+    </section>
+
+    {/* Product sections */}
+    {products.map((product, i) => (
+      <section id={product.id} class="border-t border-border/30 py-20">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Info */}
+            <div>
+              <h2 class="font-[family-name:var(--font-display)] text-3xl font-bold tracking-tight mb-3">
+                {product.title}
+              </h2>
+              <p class="text-accent text-sm font-medium mb-6">{product.tagline}</p>
+              <p class="text-text-secondary leading-relaxed mb-8">{product.description}</p>
+
+              {/* Use cases */}
+              <h3 class="font-[family-name:var(--font-display)] font-semibold text-sm uppercase tracking-wider text-text-muted mb-4">Use Cases</h3>
+              <ul class="space-y-2 mb-8">
+                {product.useCases.map(uc => (
+                  <li class="flex items-start gap-2.5 text-sm text-text-secondary">
+                    <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                    {uc}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Specs */}
+              <div class="grid grid-cols-2 gap-4">
+                {product.specs.map(spec => (
+                  <div class="rounded-xl bg-surface/40 border border-border/50 p-4">
+                    <span class="text-[11px] text-text-muted uppercase tracking-wider block mb-1">{spec.label}</span>
+                    <span class="font-[family-name:var(--font-display)] font-bold text-base">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Code Example */}
+            <div class="rounded-2xl border border-border bg-deep/80 overflow-hidden shadow-xl shadow-black/30 sticky top-24">
+              <div class="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-surface/30">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500/60"></span>
+                <span class="ml-3 text-[10px] text-text-muted font-[family-name:var(--font-mono)]">example.js</span>
+              </div>
+              <pre class="p-6 text-[13px] leading-relaxed font-[family-name:var(--font-mono)] overflow-x-auto text-text-secondary"><code>{product.codeExample}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

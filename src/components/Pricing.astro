@@ -1,0 +1,114 @@
+---
+const plans = [
+  {
+    name: 'Free',
+    price: '$0',
+    period: 'forever',
+    description: 'Perfect for prototyping and personal projects.',
+    features: [
+      '1,000 requests/month',
+      'All three APIs',
+      'Community support',
+      'Basic dashboard',
+    ],
+    cta: 'Get Started',
+    ctaStyle: 'border',
+    highlight: false,
+  },
+  {
+    name: 'Pro',
+    price: '$49',
+    period: '/month',
+    description: 'For teams building production applications.',
+    features: [
+      '100,000 requests/month',
+      'All three APIs',
+      'Priority support (< 4hr)',
+      'Advanced analytics',
+      'Webhooks & streaming',
+      'Custom rate limits',
+    ],
+    cta: 'Start Free Trial',
+    ctaStyle: 'solid',
+    highlight: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: 'Dedicated infrastructure and SLAs for scale.',
+    features: [
+      'Unlimited requests',
+      'All three APIs',
+      'Dedicated support engineer',
+      'Custom SLA (99.99%)',
+      'On-prem deployment option',
+      'SSO & audit logs',
+      'Volume discounts',
+    ],
+    cta: 'Contact Sales',
+    ctaStyle: 'border',
+    highlight: false,
+  },
+];
+---
+
+<section id="pricing" class="py-24 border-t border-border/30">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">Pricing</span>
+      <h2 class="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        Simple, transparent pricing
+      </h2>
+      <p class="text-text-secondary text-lg">
+        Start free, scale as you grow. All plans include access to every API.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <div class:list={[
+          'relative rounded-2xl p-8 transition-all duration-300',
+          plan.highlight
+            ? 'border-2 border-accent/40 bg-accent/5 shadow-xl shadow-accent/10'
+            : 'border border-border bg-deep/60 hover:border-border-light'
+        ]}>
+          {plan.highlight && (
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-accent text-midnight">
+              Recommended
+            </span>
+          )}
+
+          <h3 class="font-[family-name:var(--font-display)] font-bold text-lg mb-1">{plan.name}</h3>
+          <p class="text-sm text-text-muted mb-6">{plan.description}</p>
+
+          <div class="mb-6">
+            <span class="font-[family-name:var(--font-display)] text-4xl font-bold">{plan.price}</span>
+            {plan.period && <span class="text-text-muted text-sm">{plan.period}</span>}
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            {plan.features.map(f => (
+              <li class="flex items-start gap-2.5 text-sm text-text-secondary">
+                <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href={plan.name === 'Enterprise' ? '/contact' : 'https://dashboard.ok-robot.co'}
+            class:list={[
+              'block text-center py-3 px-6 rounded-xl text-sm font-semibold transition-all',
+              plan.ctaStyle === 'solid'
+                ? 'bg-accent text-midnight hover:bg-accent-dim shadow-lg shadow-accent/20'
+                : 'border border-border-light text-text-primary hover:bg-surface/50'
+            ]}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

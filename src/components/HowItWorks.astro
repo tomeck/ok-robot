@@ -1,0 +1,58 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'Get your API key',
+    desc: 'Sign up and generate a key in seconds. No credit card required for the free tier.',
+    code: 'export OK_ROBOT_KEY=okr_live_...',
+  },
+  {
+    num: '02',
+    title: 'Install the SDK',
+    desc: 'Available for JavaScript, Python, Go, and Rust. Or call the REST API directly.',
+    code: 'npm install @ok-robot/sdk',
+  },
+  {
+    num: '03',
+    title: 'Make your first call',
+    desc: 'Every endpoint is designed to be intuitive. Most integrations take under 10 minutes.',
+    code: 'const res = await client.transform({ input, schema })',
+  },
+  {
+    num: '04',
+    title: 'Scale with confidence',
+    desc: 'Built-in rate limiting, retries, and monitoring. Upgrade your plan as you grow.',
+    code: '// 10M+ requests/month — no sweat',
+  },
+];
+---
+
+<section class="py-24 border-t border-border/30">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <span class="text-xs font-semibold tracking-widest uppercase text-accent mb-3 block">How It Works</span>
+      <h2 class="font-[family-name:var(--font-display)] text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        From zero to production in minutes
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {steps.map((step) => (
+        <div class="relative group">
+          {/* Step number */}
+          <span class="font-[family-name:var(--font-mono)] text-[64px] font-bold leading-none text-surface-light/60 group-hover:text-accent/15 transition-colors absolute -top-2 -left-1">
+            {step.num}
+          </span>
+
+          <div class="relative pt-14">
+            <h3 class="font-[family-name:var(--font-display)] font-semibold text-lg mb-2">{step.title}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed mb-4">{step.desc}</p>
+            <div class="rounded-lg bg-surface/50 border border-border/50 px-3 py-2">
+              <code class="text-[11px] font-[family-name:var(--font-mono)] text-accent/80">{step.code}</code>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

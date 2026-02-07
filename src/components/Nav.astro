@@ -1,0 +1,89 @@
+---
+const navLinks = [
+  { label: 'Products', href: '/products' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border/50 backdrop-blur-xl bg-midnight/70">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+        <span class="text-accent font-bold text-sm font-[family-name:var(--font-mono)]">OK</span>
+      </div>
+      <span class="font-[family-name:var(--font-display)] font-bold text-lg tracking-tight text-text-primary">
+        OK ROBOT
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
+            currentPath === link.href
+              ? 'text-accent bg-accent/10'
+              : 'text-text-secondary hover:text-text-primary hover:bg-surface/50'
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="/contact" class="text-sm text-text-secondary hover:text-text-primary transition-colors">
+        Contact
+      </a>
+      <a
+        href="https://dashboard.ok-robot.co"
+        class="px-4 py-2 bg-accent text-midnight text-sm font-semibold rounded-lg hover:bg-accent-dim transition-colors"
+      >
+        Get API Key
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden p-2 text-text-secondary hover:text-text-primary" aria-label="Menu">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border/50 bg-midnight/95 backdrop-blur-xl">
+    <div class="px-6 py-4 space-y-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="block px-4 py-3 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface/50 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/contact" class="block px-4 py-3 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface/50 transition-colors">
+        Contact
+      </a>
+      <div class="pt-2">
+        <a href="https://dashboard.ok-robot.co" class="block text-center px-4 py-3 bg-accent text-midnight text-sm font-semibold rounded-lg">
+          Get API Key
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>
